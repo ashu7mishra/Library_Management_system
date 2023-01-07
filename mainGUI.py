@@ -273,14 +273,4 @@ class Ui_MainWindow(object):
         self.toolButton_addMember.setText(_translate("MainWindow", "Add Member"))
         self.toolButton_viewBook.setText(_translate("MainWindow", "View Book"))
         self.toolButton_viewMember.setText(_translate("MainWindow", "View Member"))
-# import images_rc
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

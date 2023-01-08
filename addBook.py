@@ -69,7 +69,7 @@ class Add_Dialog(object):
     def insert_book(self):
         try:
             mydb = mc.connect(
-                host="localhost",
+                host="127.0.0.1",
                 user="root",
                 password="",
                 database="library"
@@ -85,8 +85,8 @@ class Add_Dialog(object):
                 return
 
             mycursor = mydb.cursor()
-            query = "INSERT INTO tbl_addbook (title, id, author, publisher) VALUES (%s, %s, %s, %s)"
-            value = (title, id, author, publisher)
+            query = "INSERT INTO book (id, title, author, publisher) VALUES (%s, %s, %s, %s)"
+            value = (id, title, author, publisher)
             mycursor.execute(query, value)
             mydb.commit()
             self.label.setText("Data added successfully")

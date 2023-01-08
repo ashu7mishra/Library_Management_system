@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import mysql.connector as mc
 
 
 class Add_Dialog(object):
@@ -46,6 +47,7 @@ class Add_Dialog(object):
         self.lineEdit_publisher.setObjectName("lineEdit_publisher")
         self.verticalLayout.addWidget(self.lineEdit_publisher)
         self.pushButton_addBook = QtWidgets.QPushButton(Dialog)
+        self.pushButton_addBook.clicked.connect(self.insert_book)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.pushButton_addBook.setFont(font)
@@ -63,6 +65,41 @@ class Add_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def insert_book(self):
+        try:
+            mydb = mc.connect(
+                host="localhost",
+                user="root",
+                password="",
+                database="library"
+            )
+            title = self.lineEdit_title.text()
+            id = self.lineEdit_ID.text()
+            author = self.lineEdit_author.text()
+            publisher = self.lineEdit_publisher.text()
+
+            if title == "" or id == "" or author == "" or publisher == "":
+                self.label.setText("Please add all fields")
+                self.label.setStyleSheet("color:red")
+                return
+
+            mycursor = mydb.cursor()
+            query = "INSERT INTO tbl_addbook (title, id, author, publisher) VALUES (%s, %s, %s, %s)"
+            value = (title, id, author, publisher)
+            mycursor.execute(query, value)
+            mydb.commit()
+            self.label.setText("Data added successfully")
+            self.label.setStyleSheet("color:green")
+
+            self.lineEdit_title.setText("")
+            self.lineEdit_ID.setText("")
+            self.lineEdit_author.setText("")
+            self.lineEdit_publisher.setText("")
+
+        except mc.Error as e:
+            self.label.setText("Failed to add Book")
+            self.label.setStyleSheet("color:red")
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

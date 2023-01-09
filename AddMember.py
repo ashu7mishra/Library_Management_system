@@ -79,6 +79,7 @@ class Member_Dialog(object):
                 password="",
                 database="library"
             )
+
             name = self.lineEdit_memberName.text()
             id = self.lineEdit_memberID.text()
             mobile = self.lineEdit_memberMobile.text()

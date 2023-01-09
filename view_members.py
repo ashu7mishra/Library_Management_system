@@ -75,6 +75,7 @@ class Member_Ui(object):
             for row_num, row_data in enumerate(result):
                 self.tableWidget.insertRow(row_num)
 
+
                 for col_num, data in enumerate(row_data):
                     self.tableWidget.setItem(row_num,col_num,QTableWidgetItem(str(data)))
 

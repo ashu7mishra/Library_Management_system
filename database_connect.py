@@ -14,3 +14,4 @@ query = "INSERT INTO book (id, title, author, publisher) VALUES (%s, %s, %s, %s)
 value = (id, title, author, publisher)
 mycursor.execute(query, value)
 mydb.commit()
+

@@ -97,3 +97,4 @@ class View_Dialog(object):
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Dialog", "Available"))
         self.pushButton.setText(_translate("Dialog", "View Books"))
+

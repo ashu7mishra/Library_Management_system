@@ -37,6 +37,7 @@ class Add_Dialog(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.lineEdit_author.setFont(font)
+
         self.lineEdit_author.setObjectName("lineEdit_author")
         self.verticalLayout.addWidget(self.lineEdit_author)
         self.lineEdit_publisher = QtWidgets.QLineEdit(Dialog)

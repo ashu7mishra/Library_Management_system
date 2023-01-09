@@ -74,7 +74,7 @@ class Member_Dialog(object):
     def insert_member(self):
         try:
             mydb = mc.connect(
-                host="127.0.0.1",
+                host="localhost",
                 user="root",
                 password="",
                 database="library"

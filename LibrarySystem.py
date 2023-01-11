@@ -140,12 +140,12 @@ class LibrarySystem(QMainWindow, Ui_MainWindow):
 
             result = mycursor.fetchall()
 
-            self.tableWidget_bookinfo.setRowCount(0)
+            self.tabWidget.setRowCount(0)
 
             for row_num, row_data in enumerate(result):
-                self.tableWidget_bookinfo.insertRow(row_num)
+                self.tabWidget.insertRow(row_num)
                 for col_num, data in enumerate(row_data):
-                    self.tableWidget_bookinfo.setItem(row_num, col_num, QTableWidgetItem(str(data)))
+                    self.tabWidget.setItem(row_num, col_num, QTableWidgetItem(str(data)))
 
         except mc.Error as e:
             print("Error")

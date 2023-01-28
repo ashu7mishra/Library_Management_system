@@ -21,6 +21,8 @@ class LibrarySystem(QMainWindow, Ui_MainWindow):
         self.lineEdit_MemberID.returnPressed.connect(self.member_id)
         self.toolButton_issueBook.clicked.connect(self.issue_book)
         self.lineEdit_submission.returnPressed.connect(self.load_issue)
+        self.pushButton_Submission.clicked.connect(self.submit_book)
+        self.pushButton_renew.clicked.connect(self.renew_book)
 
     def add_book(self):
         dialog = QDialog()
@@ -149,6 +151,60 @@ class LibrarySystem(QMainWindow, Ui_MainWindow):
 
         except mc.Error as e:
             print("Error")
+
+    def submit_book(self):
+        issue_id = self.lineEdit_submission.text()
+
+        try:
+            mydb = mc.connect(
+                host="localhost",
+                user="root",
+                password="",
+                database="library"
+            )
+            if issue_id == '':
+                QMessageBox.about(self, "Book Submission", "Please choose a book")
+                return
+
+            mycursor = mydb.cursor()
+            query = "DELETE FROM tbl_issue WHERE bookID = ' " + issue_id + " ' "
+            query2 = "UPDATE book SET available = TRUE where id = ' " + issue_id + " ' "
+
+            mycursor.execute(query)
+            mycursor.execute(query2)
+
+            mydb.commit()
+            QMessageBox.about(self, "Book Submission", "Book Submitted Successfully")
+
+        except mc.Error as e:
+            print("Error")
+
+    def renew_book(self):
+        issue_id = self.lineEdit_submission.text()
+
+        try:
+            mydb = mc.connect(
+                host="localhost",
+                user="root",
+                password="",
+                database="library"
+            )
+            if issue_id == '':
+                QMessageBox.about(self, "Book Issue", "Please choose a book")
+                return
+
+            mycursor = mydb.cursor()
+            query = "UPDATE tbl_issue SET issue_time = CURRENT_TIMESTAMP, renewCount = renewCount + 1 where id = ' " + issue_id + " '"
+
+            mycursor.execute(query)
+
+            mydb.commit()
+            QMessageBox.about(self, "Book Renew", "Book Renewed Successfully")
+
+        except mc.Error as e:
+            print("Error")
+
+
 
 
 
